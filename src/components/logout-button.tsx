@@ -1,15 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 import { LogOut } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
 
-export function LogoutButton() {
+export function LogoutButton({ className }: { className?: string }) {
   const router = useRouter();
-  const supabase = createClient();
+  const [pending, setPending] = useState(false);
 
   async function handleLogout() {
-    await supabase.auth.signOut();
+    setPending(true);
+    await createClient().auth.signOut();
     router.push("/login");
     router.refresh();
   }
@@ -17,10 +20,11 @@ export function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition"
-      title="Log out"
+      disabled={pending}
+      className={cn("btn btn-ghost px-3 py-2", className)}
+      aria-label="Log out"
     >
-      <LogOut className="w-4 h-4" />
+      <LogOut className="size-4" />
       <span className="hidden sm:inline">Log out</span>
     </button>
   );

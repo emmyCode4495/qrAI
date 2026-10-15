@@ -55,7 +55,8 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ## Current Status (MVP Progress)
 
-- [x] Landing page
+- [x] Landing page (redesigned: "marked-up document" identity, live demo, light default + dark toggle)
+- [x] Responsive dashboard shell with sidebar, credit meter and upload zone UI
 - [x] Email + Password auth
 - [x] Google OAuth
 - [x] Protected dashboard
